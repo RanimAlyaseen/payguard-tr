@@ -1,0 +1,153 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=44049 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+Picked up _JAVA_OPTIONS: -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_base64_encodeBlock,_base64_decodeBlock
+PayGuard TR - reconciliation core demonstration
+evaluatedAt = 2026-11-22T12:00:00Z (injected, never read from a clock)
+==============================================================================
+
+1. Clean match
+   The gateway captured 1,250.00 TRY and the shop has a paid, unfulfilled 
+   order for the same amount.
+   ------------------------------------------------------------------------
+   finding       : MATCHED
+   severity      : INFO
+   action        : NONE
+   amountAtRisk  : (absent)
+   reasons       : (none)
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: statuses recognised, history consistent with queried status
+                   gate 3: all amounts in TRY
+                   gate 4: no transaction history supplied; duplicate captures undetectable
+                   table[CAPTURED][PAID_UNFULFILLED] = agreement; proceed to amounts
+                   amounts: within tolerance 0 minor units
+                   priority 8: MATCHED
+
+2. Payment without order
+   A capture exists at the gateway; the shop has no order for that 
+   reference at all. Note the absent amount at risk: no refund figure is 
+   available, so the net exposure is not computable (DEF-001) - and 
+   severity stays HIGH regardless.
+   ------------------------------------------------------------------------
+   finding       : PAYMENT_WITHOUT_ORDER
+   severity      : HIGH
+   action        : MANUAL_INVESTIGATION
+   amountAtRisk  : (absent)
+   reasons       : (none)
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: statuses recognised, history consistent with queried status
+                   gate 3: all amounts in TRY
+                   gate 4: no transaction history supplied; duplicate captures undetectable
+                   table[CAPTURED][ABSENT] = PAYMENT_WITHOUT_ORDER
+
+3. Paid payment, unpaid order
+   The customer was charged 1,250.00 TRY an hour ago and the order is 
+   still awaiting payment.
+   ------------------------------------------------------------------------
+   finding       : ORDER_UNPAID_DESPITE_PAYMENT
+   severity      : HIGH
+   action        : ALERT_MERCHANT
+   amountAtRisk  : 125000 TRY(minor)
+   reasons       : (none)
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: statuses recognised, history consistent with queried status
+                   gate 3: all amounts in TRY
+                   gate 4: no transaction history supplied; duplicate captures undetectable
+                   table[CAPTURED][AWAITING_PAYMENT] = ORDER_UNPAID_DESPITE_PAYMENT
+
+4. Legitimate instalment excess
+   Requested 1,250.00 but collected 1,312.50 across 3 instalments. PayTR 
+   documents that the collected total can exceed the requested amount, so 
+   this must NOT be flagged.
+   ------------------------------------------------------------------------
+   finding       : MATCHED
+   severity      : INFO
+   action        : NONE
+   amountAtRisk  : (absent)
+   reasons       : 
+                   - installment_excess_allowed
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: statuses recognised, history consistent with queried status
+                   gate 3: all amounts in TRY
+                   gate 4: no transaction history supplied; duplicate captures undetectable
+                   table[CAPTURED][PAID_UNFULFILLED] = agreement; proceed to amounts
+                   amounts: collected exceeds requested by 6250 TRY(minor) with 3 instalment(s); documented as expected
+                   amounts: within tolerance 0 minor units
+                   priority 8: MATCHED
+
+5. Duplicate capture
+   Two distinct capture rows in the gateway's transaction history for one 
+   order reference.
+   ------------------------------------------------------------------------
+   finding       : DUPLICATE_PAYMENT
+   severity      : HIGH
+   action        : MANUAL_INVESTIGATION
+   amountAtRisk  : 125000 TRY(minor)
+   reasons       : 
+                   - duplicate_payment
+                   - distinct_capture_records=2
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: statuses recognised, history consistent with queried status
+                   gate 3: all amounts in TRY
+                   gate 4: 2 distinct capture records for one order reference
+
+6. Conflicting same-identity records
+   One recordIdentity, two different amounts. There is no defensible 
+   basis for choosing between them, so PayGuard reports that it cannot 
+   tell rather than picking one.
+   ------------------------------------------------------------------------
+   finding       : INSUFFICIENT_DATA
+   severity      : MEDIUM
+   action        : MANUAL_INVESTIGATION
+   amountAtRisk  : (absent)
+   reasons       : 
+                   - conflicting_records_same_identity
+                   - conflicting_identity=txn-9
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: 1 record identity group(s) with differing content
+
+7. Queried status contradicted by history
+   The status-inquiry API says the payment FAILED, while the gateway's 
+   own transaction history lists a capture. History never overrides the 
+   queried status (INV-13), and the status does not silently win either.
+   ------------------------------------------------------------------------
+   finding       : INSUFFICIENT_DATA
+   severity      : MEDIUM
+   action        : MANUAL_INVESTIGATION
+   amountAtRisk  : (absent)
+   reasons       : 
+                   - gateway_history_contradicts_queried_state
+                   - queried_status=FAILED
+                   - capture_records=1
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: queried status FAILED cannot coexist with 1 capture record(s); neither source wins
+
+8. Within grace period
+   Identical to 'paid payment, unpaid order' but only 5 seconds old. The 
+   two systems are eventually consistent, so this is recorded as observed 
+   rather than reported. Age is measured from domain time only, so 
+   re-polling cannot restart the window.
+   ------------------------------------------------------------------------
+   finding       : WITHIN_GRACE_PERIOD
+   severity      : INFO
+   action        : OBSERVE
+   amountAtRisk  : (absent)
+   reasons       : 
+                   - within_grace_period
+                   - suppressed_candidate=ORDER_UNPAID_DESPITE_PAYMENT
+                   - discrepancy_age=PT5S
+   decisionPath  :
+                   gate 1: input valid
+                   gate 2: statuses recognised, history consistent with queried status
+                   gate 3: all amounts in TRY
+                   gate 4: no transaction history supplied; duplicate captures undetectable
+                   table[CAPTURED][AWAITING_PAYMENT] = ORDER_UNPAID_DESPITE_PAYMENT
+                   gate 5: age PT5S < gracePeriod PT15M; suppressing ORDER_UNPAID_DESPITE_PAYMENT
+
+==============================================================================
+8 scenarios evaluated.

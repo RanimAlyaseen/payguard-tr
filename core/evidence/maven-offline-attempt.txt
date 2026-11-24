@@ -1,0 +1,33 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.payguard:payguard-core >---------------------
+[INFO] Building PayGuard TR reconciliation core 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The POM for org.jacoco:jacoco-maven-plugin:jar:0.8.12 is missing, no dependency information available
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.134 s
+[INFO] Finished at: 2026-11-22T22:09:04+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Plugin org.jacoco:jacoco-maven-plugin:0.8.12 or one of its dependencies could not be resolved:
+[ERROR] 	Cannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.jacoco:jacoco-maven-plugin:jar:0.8.12 has not been downloaded from it before.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/jacoco-maven-plugin/0.8.12/jacoco-maven-plugin-0.8.12.pom
+[INFO] BUILD FAILURE
+[ERROR] Plugin org.jacoco:jacoco-maven-plugin:0.8.12 or one of its dependencies could not be resolved:
+[ERROR] 	The following artifacts could not be resolved: org.jacoco:jacoco-maven-plugin:pom:0.8.12 (absent): Could not transfer artifact org.jacoco:jacoco-maven-plugin:pom:0.8.12 from/to central (https://repo.maven.apache.org/maven2): repo.maven.apache.org: Name or service not known
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException

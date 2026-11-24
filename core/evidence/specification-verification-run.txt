@@ -1,0 +1,39 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=44049 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+Picked up _JAVA_OPTIONS: -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_base64_encodeBlock,_base64_decodeBlock
+PayGuard TR - specification verification
+========================================================================
+  DecisionTableTest                     82 checks  ok
+  TotalityTest                          84 checks  ok
+  RulePriorityTest                       5 checks  ok
+  AuthoritativeStateTest                 8 checks  ok
+  MoneyTest                             14 checks  ok
+  AmountComparisonTest                  11 checks  ok
+  InstallmentAllowanceTest               7 checks  ok
+  CurrencyRuleTest                       5 checks  ok
+  GracePeriodTest                        8 checks  ok
+  GraceSuppressionTest                  88 checks  ok
+  StaleThresholdTest                     6 checks  ok
+  DuplicatePaymentTest                   9 checks  ok
+  RefundDivergenceTest                  11 checks  ok
+  UnknownStatusTest                     20 checks  ok
+  RecordIdentityTest                     5 checks  ok
+  RecordNormalizerTest                   9 checks  ok
+  ConflictingIdentityTest               13 checks  ok
+  RepetitionInvariancePropertyTest       6 checks  ok
+  OrderIndependencePropertyTest         93 checks  ok
+  SeverityTest                          38 checks  ok
+  AmountAtRiskTest                      14 checks  ok
+  InputValidationTest                   17 checks  ok
+  PurityTest                            81 checks  ok
+  TimeSourceTest                        12 checks  ok
+  ImmutabilityTest                       5 checks  ok
+  regression/DefectRegressionTest       13 checks  ok
+  TestModeNeutralityTest                27 checks  ok
+  DecisionTableTest(threshold)          24 checks  ok
+  AmountAtRiskTest(edges)                6 checks  ok
+  RulePriorityTest(grace/amount)         4 checks  ok
+  ConflictingIdentityTest(fields)        3 checks  ok
+
+------------------------------------------------------------------------
+groups: 31    checks executed: 728    passed: 728    failed: 0
+------------------------------------------------------------------------

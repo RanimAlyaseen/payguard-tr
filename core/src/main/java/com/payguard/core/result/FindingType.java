@@ -1,0 +1,21 @@
+package com.payguard.core.result;
+
+/** The sixteen verdicts the reconciler can return (domain-model.md §2, requirements §4.4). */
+public enum FindingType {
+    MATCHED,
+    WITHIN_GRACE_PERIOD,
+    AUTHORIZATION_PENDING,
+    IN_PROGRESS_PENDING,
+    INSUFFICIENT_DATA,
+    STALE_AUTHORIZATION,
+    STALE_IN_PROGRESS,
+    AMOUNT_MISMATCH,
+    STATUS_CONFLICT,
+    PAYMENT_WITHOUT_ORDER,
+    ORDER_UNPAID_DESPITE_PAYMENT,
+    PAYMENT_AGAINST_CANCELLED_ORDER,
+    ORDER_PAID_WITHOUT_PAYMENT,
+    REFUND_DIVERGENCE,
+    CURRENCY_MISMATCH,
+    DUPLICATE_PAYMENT
+}

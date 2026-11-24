@@ -1,0 +1,1 @@
+Surefire reports from a fault-injection run on 24 Nov 2026: the DEF-001 fix was removed in a separate copy of the project to show a real failing execution (Report, Section 5). Result: 304 tests, 2 failures, BUILD FAILURE. The submitted code is unchanged and passes 304/304. Full console output: ..\def001-fault-injection-run.txt

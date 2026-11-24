@@ -1,0 +1,183 @@
+PS C:\Windows\System32> cd $HOME\Downloads
+PS C:\Users\llirx\Downloads> Move-Item -Force "2309115360_RANIM_ALYASEIN (3).pdf" "2309115360_RANIM_ALYASEIN.pdf"
+Move-Item: Cannot find path 'C:\Users\llirx\Downloads\2309115360_RANIM_ALYASEIN (3).pdf' because it does not exist.
+PS C:\Users\llirx\Downloads> # 0. Check the project path (should print True)
+PS C:\Users\llirx\Downloads> Test-Path $HOME\payguard\core\pom.xml
+True
+PS C:\Users\llirx\Downloads>
+PS C:\Users\llirx\Downloads> # 1. Make a separate copy
+PS C:\Users\llirx\Downloads> Copy-Item -Recurse $HOME\payguard $HOME\payguard-fault-demo
+PS C:\Users\llirx\Downloads> cd $HOME\payguard-fault-demo\core
+PS C:\Users\llirx\payguard-fault-demo\core>
+PS C:\Users\llirx\payguard-fault-demo\core> # 2. Put the DEF-001 bug back in the COPY only (returns the collected amount again)
+PS C:\Users\llirx\payguard-fault-demo\core> $f = (Resolve-Path "src\main\java\com\payguard\core\rules\Exposure.java").Path
+PS C:\Users\llirx\payguard-fault-demo\core> $t = [IO.File]::ReadAllText($f)
+PS C:\Users\llirx\payguard-fault-demo\core> $t = [regex]::Replace($t, '(?s)(if \(refunded\.isEmpty\(\)\) \{.*?)return Optional\.empty\(\);', '$1return collected;')
+PS C:\Users\llirx\payguard-fault-demo\core> [IO.File]::WriteAllText($f, $t)
+PS C:\Users\llirx\payguard-fault-demo\core>
+PS C:\Users\llirx\payguard-fault-demo\core> # 3. Run the full suite
+PS C:\Users\llirx\payguard-fault-demo\core> mvn clean test
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ---------------------< com.payguard:payguard-core >---------------------
+[INFO] Building PayGuard TR reconciliation core 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ payguard-core ---
+[INFO] Deleting C:\Users\llirx\payguard-fault-demo\core\target
+[INFO]
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ payguard-core ---
+[INFO] argLine set to -javaagent:C:\\Users\\llirx\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\llirx\\payguard-fault-demo\\core\\target\\jacoco.exec
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ payguard-core ---
+[INFO] skip non existing resourceDirectory C:\Users\llirx\payguard-fault-demo\core\src\main\resources
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ payguard-core ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 35 source files with javac [debug release 21] to target\classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ payguard-core ---
+[INFO] skip non existing resourceDirectory C:\Users\llirx\payguard-fault-demo\core\src\test\resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ payguard-core ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 31 source files with javac [debug release 21] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ payguard-core ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.payguard.core.engine.AuthoritativeStateTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s -- in com.payguard.core.engine.AuthoritativeStateTest
+[INFO] Running com.payguard.core.engine.ConflictingIdentityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.payguard.core.engine.ConflictingIdentityTest
+[INFO] Running com.payguard.core.engine.DecisionTableTest
+[INFO] Tests run: 93, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.230 s -- in com.payguard.core.engine.DecisionTableTest
+[INFO] Running com.payguard.core.engine.ImmutabilityTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.payguard.core.engine.ImmutabilityTest
+[INFO] Running com.payguard.core.engine.InputValidationTest
+[INFO] Running com.payguard.core.engine.InputValidationTest$Accepted
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.payguard.core.engine.InputValidationTest$Accepted
+[INFO] Running com.payguard.core.engine.InputValidationTest$Rejected
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.payguard.core.engine.InputValidationTest$Rejected
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s -- in com.payguard.core.engine.InputValidationTest
+[INFO] Running com.payguard.core.engine.OrderIndependencePropertyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.engine.OrderIndependencePropertyTest
+[INFO] Running com.payguard.core.engine.PurityTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.payguard.core.engine.PurityTest
+[INFO] Running com.payguard.core.engine.RecordNormalizerTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.engine.RecordNormalizerTest
+[INFO] Running com.payguard.core.engine.RepetitionInvariancePropertyTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.engine.RepetitionInvariancePropertyTest
+[INFO] Running com.payguard.core.engine.RulePriorityTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.payguard.core.engine.RulePriorityTest
+[INFO] Running com.payguard.core.engine.TimeSourceTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.engine.TimeSourceTest
+[INFO] Running com.payguard.core.engine.TotalityTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.payguard.core.engine.TotalityTest
+[INFO] Running com.payguard.core.model.MoneyTest
+[INFO] Running com.payguard.core.model.MoneyTest$Structure
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.payguard.core.model.MoneyTest$Structure
+[INFO] Running com.payguard.core.model.MoneyTest$ValueSemantics
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.payguard.core.model.MoneyTest$ValueSemantics
+[INFO] Running com.payguard.core.model.MoneyTest$Arithmetic
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.payguard.core.model.MoneyTest$Arithmetic
+[INFO] Running com.payguard.core.model.MoneyTest$Construction
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.payguard.core.model.MoneyTest$Construction
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in com.payguard.core.model.MoneyTest
+[INFO] Running com.payguard.core.model.RecordIdentityTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.payguard.core.model.RecordIdentityTest
+[INFO] Running com.payguard.core.regression.DefectRegressionTest
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def005CurrencyGate
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.payguard.core.regression.DefectRegressionTest$Def005CurrencyGate
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def004BusinessStateTime
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.payguard.core.regression.DefectRegressionTest$Def004BusinessStateTime
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def003TypedValidation
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.regression.DefectRegressionTest$Def003TypedValidation
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def002LimitationPlacement
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.regression.DefectRegressionTest$Def002LimitationPlacement
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def001ExposureAbsence
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.019 s <<< FAILURE! -- in com.payguard.core.regression.DefectRegressionTest$Def001ExposureAbsence
+[ERROR] com.payguard.core.regression.DefectRegressionTest$Def001ExposureAbsence.capturedOrphanHasNoComputableExposure -- Time elapsed: 0.011 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: an absent refund amount means the net exposure is unknown, not zero ==> expected: <true> but was: <false>
+        at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+        at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+        at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+        at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+        at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+        at com.payguard.core.regression.DefectRegressionTest$Def001ExposureAbsence.capturedOrphanHasNoComputableExposure(DefectRegressionTest.java:53)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s -- in com.payguard.core.regression.DefectRegressionTest
+[INFO] Running com.payguard.core.result.AmountAtRiskTest
+[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.011 s <<< FAILURE! -- in com.payguard.core.result.AmountAtRiskTest
+[ERROR] com.payguard.core.result.AmountAtRiskTest.absentBecauseUncomputable -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: ?4.4 requires both amounts to be known; no refund figure means no net exposure, and the collected amount alone would be a different quantity reported as if it were this one ==> expected: <true> but was: <false>
+        at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+        at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+        at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+        at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+        at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+        at com.payguard.core.result.AmountAtRiskTest.absentBecauseUncomputable(AmountAtRiskTest.java:68)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.payguard.core.result.SeverityTest
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in com.payguard.core.result.SeverityTest
+[INFO] Running com.payguard.core.rules.AmountComparisonTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s -- in com.payguard.core.rules.AmountComparisonTest
+[INFO] Running com.payguard.core.rules.CurrencyGateCoverageTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.rules.CurrencyGateCoverageTest
+[INFO] Running com.payguard.core.rules.CurrencyRuleTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.payguard.core.rules.CurrencyRuleTest
+[INFO] Running com.payguard.core.rules.DuplicatePaymentTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.payguard.core.rules.DuplicatePaymentTest
+[INFO] Running com.payguard.core.rules.GracePeriodTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.payguard.core.rules.GracePeriodTest
+[INFO] Running com.payguard.core.rules.GraceSuppressionTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.payguard.core.rules.GraceSuppressionTest
+[INFO] Running com.payguard.core.rules.InstallmentAllowanceTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.payguard.core.rules.InstallmentAllowanceTest
+[INFO] Running com.payguard.core.rules.RefundDivergenceTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.rules.RefundDivergenceTest
+[INFO] Running com.payguard.core.rules.StaleThresholdTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.rules.StaleThresholdTest
+[INFO] Running com.payguard.core.rules.TestModeNeutralityTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.payguard.core.rules.TestModeNeutralityTest
+[INFO] Running com.payguard.core.rules.UnknownStatusTest
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in com.payguard.core.rules.UnknownStatusTest
+[INFO]
+[INFO] Results:
+[INFO]
+[ERROR] Failures:
+[ERROR]   DefectRegressionTest$Def001ExposureAbsence.capturedOrphanHasNoComputableExposure:53 an absent refund amount means the net exposure is unknown, not zero ==> expected: <true> but was: <false>
+[ERROR]   AmountAtRiskTest.absentBecauseUncomputable:68 ?4.4 requires both amounts to be known; no refund figure means no net exposure, and the collected amount alone would be a different quantity reported as if it were this one ==> expected: <true> but was: <false>
+[INFO]
+[ERROR] Tests run: 304, Failures: 2, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.286 s
+[INFO] Finished at: 2026-11-24T21:13:15+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project payguard-core: There are test failures.
+[ERROR]
+[ERROR] Please refer to C:\Users\llirx\payguard-fault-demo\core\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+PS C:\Users\llirx\payguard-fault-demo\core>
+PS C:\Users\llirx\payguard-fault-demo\core>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.payguard.core.engine.DecisionTableTest" time="0.23" tests="93" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\llirx\payguard-fault-demo\core\target\test-classes;C:\Users\llirx\payguard-fault-demo\core\target\classes;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\llirx\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\llirx\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\llirx\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\llirx\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Europe/Istanbul"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.13.10002-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\llirx\AppData\Local\Temp\surefire7735347861296750751\surefirebooter-20261124211312939_3.jar C:\Users\llirx\AppData\Local\Temp\surefire7735347861296750751 2026-11-24T21-13-12_791-jvmRun1 surefire-20261124211312939_1tmp surefire_0-20261124211312939_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\llirx\payguard-fault-demo\core\target\test-classes;C:\Users\llirx\payguard-fault-demo\core\target\classes;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\llirx\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\llirx\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\llirx\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\llirx\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\llirx\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\llirx"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-11-17"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.13.10002-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\llirx\payguard-fault-demo\core"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\llirx\AppData\Local\Temp\surefire7735347861296750751\surefirebooter-20261124211312939_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.13.1+2-LTS"/>
+    <property name="user.name" value="llirx"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-21.0.13.1+2"/>
+    <property name="localRepository" value="C:\Users\llirx\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\llirx\AppData\Local\Temp\"/>
+    <property name="java.version" value="21.0.13.1"/>
+    <property name="user.dir" value="C:\Users\llirx\payguard-fault-demo\core"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.13.10002-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\llirx\AppData\Local\Microsoft\WindowsApps\Microsoft.PowerShell_8wekyb3d8bbwe;C:\Program Files\Eclipse Adoptium\jdk-21.0.13.10002-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\llirx\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\llirx\AppData\Local\Programs\Python\Python314\;C:\Users\llirx\AppData\Local\Programs\Python\Launcher\;C:\Users\llirx\AppData\Local\Microsoft\WindowsApps;C:\Users\llirx\AppData\Local\GitHubDesktop\bin;C:\Users\llirx\AppData\Roaming\npm;C:\Users\llirx\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\llirx\AppData\Local\GitHubCopilotCLI\;C:\Users\llirx\AppData\Local\Programs\Microsoft VS Code\bin\copilot-shim;C:\Users\llirx\.local\bin;C:\Users\llirx\AppData\Local\Programs\apache-maven-3.9.11\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="21.0.13.1+2-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[1]" classname="com.payguard.core.engine.DecisionTableTest" time="0.026"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[2]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[3]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[4]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[5]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[6]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[7]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[8]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[9]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[10]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[11]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="conditionalCellsResolveAtThreshold(Entry)[12]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[1]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[2]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[3]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[4]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[5]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[6]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[7]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[8]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[9]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[10]" classname="com.payguard.core.engine.DecisionTableTest" time="0.004"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[11]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[12]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[13]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[14]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[15]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[16]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[17]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[18]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[19]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[20]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[21]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[22]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[23]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[24]" classname="com.payguard.core.engine.DecisionTableTest" time="0.001"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[25]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[26]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[27]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[28]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[29]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[30]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[31]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[32]" classname="com.payguard.core.engine.DecisionTableTest" time="0.001"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[33]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[34]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[35]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[36]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[37]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[38]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[39]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[40]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[41]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[42]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[43]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[44]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[45]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[46]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[47]" classname="com.payguard.core.engine.DecisionTableTest" time="0.002"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[48]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[49]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[50]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[51]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[52]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[53]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[54]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[55]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[56]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[57]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[58]" classname="com.payguard.core.engine.DecisionTableTest" time="0.008"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[59]" classname="com.payguard.core.engine.DecisionTableTest" time="0.001"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[60]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[61]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[62]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[63]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[64]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[65]" classname="com.payguard.core.engine.DecisionTableTest" time="0.001"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[66]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[67]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[68]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[69]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[70]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[71]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[72]" classname="com.payguard.core.engine.DecisionTableTest" time="0.008"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[73]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[74]" classname="com.payguard.core.engine.DecisionTableTest" time="0.003"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[75]" classname="com.payguard.core.engine.DecisionTableTest" time="0.001"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[76]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[77]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[78]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[79]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="everyCellMatchesTheSpecification(Entry)[80]" classname="com.payguard.core.engine.DecisionTableTest" time="0.0"/>
+  <testcase name="tableSizesAgree" classname="com.payguard.core.engine.DecisionTableTest" time="0.016"/>
+</testsuite>
