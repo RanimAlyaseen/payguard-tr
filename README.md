@@ -118,3 +118,7 @@ payguard-tr/
 
 Developed for **SWE411 Software Verification and Validation** (2026). The scope, results and
 limitations are described in the [implementation summary](docs/verification/implementation-summary.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
