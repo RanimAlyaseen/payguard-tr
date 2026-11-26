@@ -5,10 +5,9 @@
 **Last updated:** 23 November 2026, after the final verification patch
 **Declared production runtime dependencies:** zero (INV-10 holds; JUnit and JaCoCo are test-scope only)
 
-> **Action required before submission.** The JUnit and JaCoCo figures in §3 and §4 were measured
-> before this patch. Three defects were fixed and three test classes added since, so both must be
-> re-measured: run `mvn clean test` and `mvn jacoco:report` and replace them. The 728 standalone
-> checks in §3 *are* current.
+> **All measurements in this document are final.** They were produced on the development machine
+> (Windows 11, Java 21, Maven) after the DEF-003/004/005 patch. Nothing here is estimated, and no
+> pre-patch figure is reused.
 
 ---
 
@@ -67,7 +66,7 @@ requirements §4.2), `SpecFixtures`, `SpecPermutations`.
 
 | # | Measurement | What it counts | Status |
 |---|---|---|---|
-| 1 | **JUnit executions** (Surefire) | Test methods executed by `mvn clean test`, parameter expansions included | **Pending re-run** — the 278 figure predates this patch |
+| 1 | **JUnit executions** (Surefire) | Test methods executed by `mvn clean test`, parameter expansions included | **304 run, 304 passed**, 0 failures / errors / skipped, `BUILD SUCCESS` |
 | 2 | **Standalone harness checks** | Individual assertions in a dependency-free runner over the same specification fixtures, used because JUnit could not be fetched in the build environment | **728 / 728**, measured |
 | 3 | **Specification-table checks** | Committed expected cells compared against `requirements.md` §4.2 by `SpecTableChecker` | **80 cells, 0 mismatches**, measured |
 
@@ -99,16 +98,24 @@ mismatches** against `requirements.md` §4.2. Result: `SPEC TABLE OK`, exit code
 committed fixture is caught rather than silently diverging. It is **not** the original generator —
 that script was ad-hoc and was not retained, which the file states in its own javadoc.
 
-### JUnit 5 — **must be re-run**
+### JUnit 5 — final, measured
 
-The last measured run, before this patch, was `Tests run: 278, Failures: 0, Errors: 0, Skipped: 0`
-with `BUILD SUCCESS`. Three test classes and three production fixes have landed since, so that
-figure is stale. Re-run and record the new one:
+`evidence/maven-surefire-final.txt`
 
-```bash
-cd core
-mvn clean test
-```
+| Metric | Value |
+|---|---|
+| Tests run | **304** |
+| Passed | **304** |
+| Failures | 0 |
+| Errors | 0 |
+| Skipped | 0 |
+| Build | `BUILD SUCCESS` |
+
+28 test classes declare 126 test methods; parameterised methods expand at run time to 304
+executions. The explicit regression tests for DEF-001 to DEF-005 are among them and all passed.
+
+(The pre-patch run reported 278. That figure predates three production fixes and three new test
+classes and is superseded.)
 
 ### Demonstration — current
 
@@ -122,24 +129,41 @@ This is reachability of declared outcomes, **not** code coverage.
 
 ---
 
-## 4. Coverage — must be re-measured
+## 4. Coverage — final, measured
 
-The last measured figures, before this patch:
+`evidence/jacoco-final.csv`
 
 | Counter | Whole module | Excluding `ReconciliationDemo` |
 |---|---|---|
-| Line | 80.1% (572 of 714) | 95.0% (572 of 602) |
-| Branch | 81.9% (203 of 248) | 86.0% (203 of 236) |
-| Method | 81.9% (118 of 144) | 92.2% (118 of 128) |
+| Line | **79.5%** (586 / 737) | **93.8%** (586 / 625) |
+| Branch | **78.8%** (208 / 264) | **82.5%** (208 / 252) |
+| Method | **81.7%** (125 / 153) | **91.2%** (125 / 137) |
+| Instruction | **83.0%** (3148 / 3795) | **93.5%** (3148 / 3367) |
 
-```bash
-mvn jacoco:report     # target/site/jacoco/index.html
-```
+`ReconciliationDemo` accounts for **112 of the 151 uncovered lines**, along with 12 branches and 16
+methods. It is a `main` that takes no input, computes nothing and prints eight scenarios for a human
+to read; no unit test calls it, which is correct.
 
-The earlier analysis found that of 142 missed lines, 112 were `ReconciliationDemo` — a `main` that
-prints for a human to read — and that the remaining ten unreached methods were all declared-but-
-unused API surface rather than rule logic. That analysis should be redone against the new report,
-since this patch added validation branches that the new negative tests exercise.
+**The whole-module figure is the project's coverage.** The demo-excluded view is offered as
+explanation, not as a substitute, and JaCoCo is deliberately *not* configured to exclude the demo —
+tuning the denominator to improve the number would be the wrong lesson to take from a verification
+exercise.
+
+### Coverage fell when three real defects were fixed
+
+Worth recording, because it is the clearest evidence in the project that coverage is not a quality
+proxy:
+
+| Counter, excluding demo | Before the DEF-003/004/005 patch | After |
+|---|---|---|
+| Line | 95.0% (572 / 602) | 93.8% (586 / 625) |
+| Branch | 86.0% (203 / 236) | 82.5% (208 / 252) |
+
+Fourteen more lines and five more branches are covered than before. The percentages still fell,
+because fixing the three defects added 23 lines and 16 branches of input validation — typed
+null-checks, the BR-07b invariant, and the widened currency gate — and exhaustively exercising every
+defensive branch costs more tests than the branches are worth. The code is strictly more correct and
+the number is strictly worse.
 
 ---
 
@@ -171,11 +195,11 @@ project, and `defect-log.md` §8 develops it.
 |---|---|
 | Production source compiles under Java 21 with `-Xlint:all` | Clean — no errors, no warnings |
 | JUnit suite compiles against the Jupiter API | Clean (28 classes) |
-| `mvn clean test` passes | Passed before this patch; **must be re-run** |
+| `mvn clean test` passes | **304 / 304, `BUILD SUCCESS`** |
 | Standalone specification verifier passes | 728 / 728 |
 | All 80 decision-table cells pass | Yes, plus 24 threshold-branch checks |
 | Specification table matches `requirements.md` §4.2 | Verified by `SpecTableChecker`, 0 mismatches |
-| Five explicit regression defects pass | Yes — `regression/DefectRegressionTest` |
+| Five explicit regression defects pass | Yes — `regression/DefectRegressionTest`, executed by Surefire |
 | Every Scope-A FR has tests | FR-01 to FR-08 |
 | EP, BVA, decision-table, negative, regression testing represented | Yes |
 | No rule reads retrieval time | `TimeSourceTest`, 12 checks |
@@ -192,7 +216,7 @@ project, and `defect-log.md` §8 develops it.
 | **BR-07b enforced** | **DEF-004 fixed; verified** |
 | No external integration in Scope A | Zero runtime dependencies; no network, database or file I/O in the core |
 | Demo executes | 8 scenarios, `evidence/demo-run.txt` |
-| JaCoCo report generated | Yes, before this patch; **must be regenerated** |
+| JaCoCo report generated | Yes — line 79.5%, branch 78.8%, method 81.7%, instruction 83.0% |
 | No fabricated metrics | Every number here came from a run whose output is in `evidence/` |
 | No architecture drift | No FindingType, decision-table cell, status value or ADR was changed |
 
@@ -200,21 +224,22 @@ project, and `defect-log.md` §8 develops it.
 
 ## 7. Remaining limitations
 
-1. **JUnit and JaCoCo figures are stale** and must be re-measured. See the box at the top.
-2. **PIT mutation testing not run.** Optional, and the strongest remaining addition: it measures
+1. **PIT mutation testing not run.** Optional, and the strongest remaining addition: it measures
    whether tests *detect* injected faults rather than merely executing code, which is the gap all
    five defects fell through.
-3. **Duplicate detection depends on supplied history.** With none, duplicates are undetectable; the
+2. **Duplicate detection depends on supplied history.** With none, duplicates are undetectable; the
    limitation is recorded in the decision path (FR-05.4) rather than passed over.
-4. **`businessStateChangedAt` is the order creation time in Scope A** (BR-07b), now enforced. Scope
+3. **`businessStateChangedAt` is the order creation time in Scope A** (BR-07b), now enforced. Scope
    B, with webhook capture, can do better.
-5. **The partial-versus-full refund direction reports no amount.** Scope A has no shop-side refund
+4. **The partial-versus-full refund direction reports no amount.** Scope A has no shop-side refund
    figure to compare against, so the exposure is absent rather than guessed.
-6. **`Severity.LOW` is unmapped.** No finding type maps to it; retained deliberately for Scope B and
+5. **`Severity.LOW` is unmapped.** No finding type maps to it; retained deliberately for Scope B and
    documented as unmapped rather than quietly deleted.
-7. **Ten methods are unreached by tests** and the honest remedy is deletion rather than new tests —
-   five interface `name()` accessors and four helpers the design declared before the implementation
-   discovered it did not want them. Not done here, because the architecture is frozen.
-8. **`SpecTableChecker` is not the original generator.** The original was ad-hoc and not kept. The
+6. **Twelve methods are unreached by tests** (125 of 137 covered outside the demo). The ten
+   identified before the patch were declared-but-unused API surface — five interface `name()`
+   accessors and four helpers the design declared before the implementation discovered it did not
+   want them — and the honest remedy is deletion rather than new tests. Not done here, because the
+   architecture is frozen.
+7. **`SpecTableChecker` is not the original generator.** The original was ad-hoc and not kept. The
    checker provides equivalent assurance going forward but cannot retroactively prove how the
    committed file was first produced.

@@ -1,4 +1,17 @@
+# Maven build output
 target/
-.vscode/
+
+# IDEs and editors
 .idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Compiled files
 *.class
+
+# OS files
+.DS_Store
+Thumbs.db

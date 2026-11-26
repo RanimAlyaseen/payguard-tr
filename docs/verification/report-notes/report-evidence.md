@@ -239,24 +239,52 @@ not measured in this environment.
 
 ---
 
-## What to say about coverage
+## What to say about coverage — the strongest single argument in the project
 
-No coverage figure exists yet: the JaCoCo agent could not be obtained in the build environment.
-Run `mvn clean test` then `mvn jacoco:report` and take the real line and branch numbers from
-`target/site/jacoco/index.html`.
+Final measured figures:
 
-Then make the point item 2 sets up: DEF-001 lived in a line that every decision-table test executed.
-Whatever percentage comes back, it was already complete for that method, and the defect was there
-anyway. Coverage measures which lines ran, not whether the right questions were asked about them —
-and a report that states its own coverage figure *and* its limits is stronger than one that reports
-either alone.
+| Counter | Whole module | Excluding `ReconciliationDemo` |
+|---|---:|---:|
+| Line | 79.5% (586/737) | 93.8% (586/625) |
+| Branch | 78.8% (208/264) | 82.5% (208/252) |
+| Method | 81.7% (125/153) | 91.2% (125/137) |
+| Instruction | 83.0% (3148/3795) | 93.5% (3148/3367) |
+
+Report the whole-module figure as the project's coverage. Offer the demo-excluded view as
+explanation — 112 of the 151 uncovered lines are the `main` that prints scenarios for a human to
+read — and say explicitly that JaCoCo was **not** configured to exclude it, because tuning a
+denominator is not verification.
+
+**Then make the argument that no textbook example can match.** Compare the two measured runs:
+
+| Counter, excluding demo | Before the DEF-003/004/005 fixes | After |
+|---|---:|---:|
+| Line | 95.0% (572/602) | 93.8% (586/625) |
+| Branch | 86.0% (203/236) | 82.5% (208/252) |
+
+Fourteen more lines and five more branches are covered after the fixes than before. The percentages
+still fell, because the three fixes added 23 lines and 16 branches of input validation — typed
+null-checks, the BR-07b invariant, the widened currency gate. **Three genuine defects were removed
+and the coverage number got worse.**
+
+If coverage measured quality, that would be a contradiction. It is not one, because coverage
+measures which lines executed, not whether the right questions were asked about them. This is also
+the cleanest possible setup for Inozemtseva and Holmes [1]: their finding that coverage should not be
+used as a quality target is not an abstraction here — this project has a before-and-after pair
+demonstrating it on its own code.
+
+Pair it with DEF-001, where the affected logic was exercised repeatedly by decision-table scenarios
+and the semantic partition "unknown" remained untested, and with JaCoCo's own documented limitation
+that exception handling is not treated as branching [3] — which systematically undercounts exactly
+the FR-08 validation work that the fixes added.
 
 ## What not to claim
 
 - No mutation score. PIT was not run.
 - No performance figures. Nothing was benchmarked.
-- No JUnit pass/fail count until the post-patch `mvn clean test` has actually run. The earlier
-  278-test figure predates DEF-003, DEF-004 and DEF-005 and is void.
+- The final JUnit figure is **304 run, 304 passed, 0 failures, 0 errors, 0 skipped**, `BUILD
+  SUCCESS`, from 28 classes declaring 126 test methods. The earlier 278-test figure predates
+  DEF-003, DEF-004 and DEF-005 and must not appear anywhere.
 - **Three different measurements, never merged.** (a) JUnit executions, from Surefire — the headline
   figure. (b) 728 standalone harness checks, from a dependency-free runner over the same
   specification fixtures, used during development because JUnit could not be fetched in the build

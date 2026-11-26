@@ -1,0 +1,125 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.payguard:payguard-core >---------------------
+[INFO] Building PayGuard TR reconciliation core 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ payguard-core ---
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ payguard-core ---
+[INFO] argLine set to -javaagent:C:\\Users\\llirx\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\llirx\\payguard-tr-new\\core\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ payguard-core ---
+[INFO] skip non existing resourceDirectory C:\Users\llirx\payguard-tr-new\core\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ payguard-core ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 35 source files with javac [debug release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ payguard-core ---
+[INFO] skip non existing resourceDirectory C:\Users\llirx\payguard-tr-new\core\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ payguard-core ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 31 source files with javac [debug release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ payguard-core ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.payguard.core.engine.AuthoritativeStateTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.124 s -- in com.payguard.core.engine.AuthoritativeStateTest
+[INFO] Running com.payguard.core.engine.ConflictingIdentityTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.payguard.core.engine.ConflictingIdentityTest
+[INFO] Running com.payguard.core.engine.DecisionTableTest
+[INFO] Tests run: 93, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.272 s -- in com.payguard.core.engine.DecisionTableTest
+[INFO] Running com.payguard.core.engine.ImmutabilityTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.payguard.core.engine.ImmutabilityTest
+[INFO] Running com.payguard.core.engine.InputValidationTest
+[INFO] Running com.payguard.core.engine.InputValidationTest$Accepted
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.payguard.core.engine.InputValidationTest$Accepted
+[INFO] Running com.payguard.core.engine.InputValidationTest$Rejected
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in com.payguard.core.engine.InputValidationTest$Rejected
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in com.payguard.core.engine.InputValidationTest
+[INFO] Running com.payguard.core.engine.OrderIndependencePropertyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.payguard.core.engine.OrderIndependencePropertyTest
+[INFO] Running com.payguard.core.engine.PurityTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in com.payguard.core.engine.PurityTest
+[INFO] Running com.payguard.core.engine.RecordNormalizerTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.engine.RecordNormalizerTest
+[INFO] Running com.payguard.core.engine.RepetitionInvariancePropertyTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.payguard.core.engine.RepetitionInvariancePropertyTest
+[INFO] Running com.payguard.core.engine.RulePriorityTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.payguard.core.engine.RulePriorityTest
+[INFO] Running com.payguard.core.engine.TimeSourceTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.payguard.core.engine.TimeSourceTest
+[INFO] Running com.payguard.core.engine.TotalityTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.payguard.core.engine.TotalityTest
+[INFO] Running com.payguard.core.model.MoneyTest
+[INFO] Running com.payguard.core.model.MoneyTest$Structure
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.model.MoneyTest$Structure
+[INFO] Running com.payguard.core.model.MoneyTest$ValueSemantics
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.payguard.core.model.MoneyTest$ValueSemantics
+[INFO] Running com.payguard.core.model.MoneyTest$Arithmetic
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.payguard.core.model.MoneyTest$Arithmetic
+[INFO] Running com.payguard.core.model.MoneyTest$Construction
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in com.payguard.core.model.MoneyTest$Construction
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.payguard.core.model.MoneyTest
+[INFO] Running com.payguard.core.model.RecordIdentityTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.model.RecordIdentityTest
+[INFO] Running com.payguard.core.regression.DefectRegressionTest
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def005CurrencyGate
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.payguard.core.regression.DefectRegressionTest$Def005CurrencyGate
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def004BusinessStateTime
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.regression.DefectRegressionTest$Def004BusinessStateTime
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def003TypedValidation
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.payguard.core.regression.DefectRegressionTest$Def003TypedValidation
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def002LimitationPlacement
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.payguard.core.regression.DefectRegressionTest$Def002LimitationPlacement
+[INFO] Running com.payguard.core.regression.DefectRegressionTest$Def001ExposureAbsence
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.regression.DefectRegressionTest$Def001ExposureAbsence
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in com.payguard.core.regression.DefectRegressionTest
+[INFO] Running com.payguard.core.result.AmountAtRiskTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.result.AmountAtRiskTest
+[INFO] Running com.payguard.core.result.SeverityTest
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.payguard.core.result.SeverityTest
+[INFO] Running com.payguard.core.rules.AmountComparisonTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s -- in com.payguard.core.rules.AmountComparisonTest
+[INFO] Running com.payguard.core.rules.CurrencyGateCoverageTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.payguard.core.rules.CurrencyGateCoverageTest
+[INFO] Running com.payguard.core.rules.CurrencyRuleTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.payguard.core.rules.CurrencyRuleTest
+[INFO] Running com.payguard.core.rules.DuplicatePaymentTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.payguard.core.rules.DuplicatePaymentTest
+[INFO] Running com.payguard.core.rules.GracePeriodTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.payguard.core.rules.GracePeriodTest
+[INFO] Running com.payguard.core.rules.GraceSuppressionTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.payguard.core.rules.GraceSuppressionTest
+[INFO] Running com.payguard.core.rules.InstallmentAllowanceTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.payguard.core.rules.InstallmentAllowanceTest
+[INFO] Running com.payguard.core.rules.RefundDivergenceTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.payguard.core.rules.RefundDivergenceTest
+[INFO] Running com.payguard.core.rules.StaleThresholdTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.payguard.core.rules.StaleThresholdTest
+[INFO] Running com.payguard.core.rules.TestModeNeutralityTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.payguard.core.rules.TestModeNeutralityTest
+[INFO] Running com.payguard.core.rules.UnknownStatusTest
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in com.payguard.core.rules.UnknownStatusTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 304, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.12:report (report) @ payguard-core ---
+[INFO] Loading execution data file C:\Users\llirx\payguard-tr-new\core\target\jacoco.exec
+[INFO] Analyzed bundle 'PayGuard TR reconciliation core' with 37 classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.562 s
+[INFO] Finished at: 2026-11-26T14:50:00+03:00
+[INFO] ------------------------------------------------------------------------

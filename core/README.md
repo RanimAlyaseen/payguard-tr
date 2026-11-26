@@ -18,12 +18,23 @@ Requires JDK 21+ and Maven 3.9+.
 
 | Measurement | Result |
 |---|---|
-| JUnit executions (Surefire) | _to be inserted from the final `mvn clean test` run_ |
-| Line / branch coverage (JaCoCo) | _to be inserted from the final `mvn jacoco:report` run_ |
+| JUnit executions (Surefire) | **304 run, 304 passed**, 0 failures, 0 errors, 0 skipped — `BUILD SUCCESS` |
+| Coverage, whole module (JaCoCo) | line **79.5%** (586/737), branch **78.8%** (208/264), method **81.7%** (125/153), instruction **83.0%** (3148/3795) |
+| Coverage, excluding `ReconciliationDemo` | line **93.8%** (586/625), branch **82.5%** (208/252), method **91.2%** (125/137), instruction **93.5%** (3148/3367) |
 | Standalone harness checks | 728 / 728, 0 failed |
 | Specification-table checks | 80 cells, 0 mismatches |
 
-These are three different measurements and are never merged: only the first is a JUnit result.
+The suite declares 126 test methods across 28 classes; parameterised methods expand at run time to
+the 304 executions above.
+
+The Surefire, harness and specification-table rows are three different measurements and are never
+merged: only the Surefire row is a JUnit result. `ReconciliationDemo` accounts for 112 of the 151 uncovered lines — it is a `main`
+that prints for a human to read. The whole-module figure is the project's coverage; the
+demo-excluded view is offered as explanation, not as a replacement, and JaCoCo is deliberately **not**
+configured to exclude the demo.
+
+Five implementation defects (DEF-001 to DEF-005) were found and fixed; each has an explicit
+regression test, and all of them execute in the Surefire run above.
 
 ## Layout
 
@@ -43,7 +54,6 @@ src/test/java/com/payguard/core/
   regression/                      explicit regression tests for DEF-001 to DEF-005
 
 verification/  a dependency-free harness (see below)
-evidence/      captured output of every run quoted in the reports
 ```
 
 ## Two things worth knowing before reading the tests
@@ -70,9 +80,10 @@ this was built (Maven Central unreachable), so the same specification fixtures w
 dependency-free harness to produce real pass/fail numbers instead of claimed ones. The JUnit suite
 under `src/test/java` is the canonical one. Run it.
 
-## Reports
+## Verification documents
 
-- `implementation-summary.md` — what was built, real execution numbers, limitations
-- `defect-log.md` — the five implementation defects (DEF-001 to DEF-005), with root causes
-- `report-correction-sheet.md` — what in the report draft is stale, and what replaces it
-- `report-evidence.md` — the strongest material for the seven-page SVV report, ranked
+These live in [`docs/verification/`](../docs/verification/):
+
+- [`implementation-summary.md`](../docs/verification/implementation-summary.md) — what was built, real execution numbers, limitations
+- [`defect-log.md`](../docs/verification/defect-log.md) — the five implementation defects (DEF-001 to DEF-005), with root causes
+- [`evidence/`](../docs/verification/evidence/) — captured output of every run quoted in the reports
